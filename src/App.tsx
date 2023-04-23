@@ -1,8 +1,13 @@
+import React from "react";
+
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const filters = [
     {
-      key: "Mega evolution",
-      value: "mega1,mega2",
+      key: "Quick cleanup",
+      value: "2-4attack&0*,1*,2*",
     },
     {
       key: "12 candy evolution",
@@ -16,6 +21,10 @@ function App() {
       key: "Nundo",
       value: "0attack&0defense&0hp",
     },
+    {
+      key: "Mega evolution",
+      value: "mega1,mega2",
+    },
   ];
 
   return (
@@ -28,6 +37,7 @@ function App() {
               className="p-2 border rounded bg-gray-100 truncate"
               onPointerUp={(_e) => {
                 navigator.clipboard.writeText(filter.value);
+                toast.info(`Copied ${filter.key.toLocaleLowerCase()} filter.`);
               }}
             >
               {filter.value}
@@ -35,6 +45,12 @@ function App() {
           </div>
         );
       })}
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        transition={Slide}
+        theme="light"
+      />
     </div>
   );
 }
